@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Youth Money Hub – All-in-One Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --navy: #0b1f3b;
+            --cream: #f7f2e9;
+            --slate: #4a5568;
+            --accent-light: #e1d5c5;
+            --success: #2f855a;
+            --warning: #dd6b20;
+            --border-radius: 16px;
+            --shadow-soft: 0 12px 30px rgba(11, 31, 59, 0.12);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: var(--cream);
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        html { scroll-behavior: smooth; }
+
+        .container {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section { padding: 4rem 0; }
+
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: var(--slate);
+            max-width: 540px;
+            margin-bottom: 2rem;
+        }
+
+        /* NAV */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(14px);
+            background: linear-gradient(to bottom, rgba(11, 31, 59, 0.96), rgba(11, 31, 59, 0.9));
+            color: #fff;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 600;
+        }
+
+        .nav-logo-mark {
+            width: 32px;
+            height: 32px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2c5282, #63b3ed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .nav-links a {
+            opacity: 0.9;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 0.55rem 1.3rem;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+            white-space: nowrap;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            color: #fff;
+        }
+
+        .btn-primary {
+            background: #f6e1b8;
+            color: #1a202c;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 26px rgba(0, 0, 0, 0.16);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border-radius: 999px;
+            padding: 0.4rem 0.9rem;
+            border: 1px solid rgba(11, 31, 59, 0.1);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 900px) {
+            .nav { flex-wrap: wrap; gap: 0.7rem; padding: 0.7rem 1rem; }
+            .nav-links { order: 3; width: 100%; justify-content: flex-start; }
+            .nav-auth { margin-left: auto; }
+        }
+
+        /* HERO */
+        .hero {
+            background: radial-gradient(circle at top left, rgba(246, 225, 184, 0.35), transparent 60%),
+                        radial-gradient(circle at bottom right, rgba(99, 179, 237, 0.16), transparent 55%);
+            padding-top: 3rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 3fr 2.2fr;
+                align-items: center;
+            }
+        }
+
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--slate);
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.1rem, 3vw, 2.7rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span {
+            background: linear-gradient(120deg, #2b6cb0, #38b2ac);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-text {
+            font-size: 0.98rem;
+            color: var(--slate);
+            max-width: 550px;
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 1.4rem;
+        }
+
+        .hero-note {
+            font-size: 0.8rem;
+            color: var(--slate);
+        }
+
+        .hero-card {
+            background: #ffffff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            padding: 1.5rem 1.3rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .hero-pill {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(47, 133, 90, 0.08);
+            color: var(--success);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            border-radius: 999px;
+            background: #edf2f7;
+            overflow: hidden;
+            margin-top: 0.4rem;
+        }
+
+        .progress-bar-fill {
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, #2b6cb0, #38b2ac);
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .hero-metric-label {
+            color: var(--slate);
+            font-size: 0.7rem;
+        }
+
+        .hero-metric-value {
+            font-weight: 600;
+        }
+
+        .muted { color: var(--slate); font-size: 0.8rem; }
+        .mt-sm { margin-top: 0.6rem; }
+
+        /* GENERAL CARDS */
+        .cards-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: var(--border-radius);
+            padding: 1.3rem 1.2rem;
+            border: 1px solid rgba(11, 31, 59, 0.06);
+            box-shadow: 0 8px 20px rgba(11, 31, 59, 0.06);
+            font-size: 0.9rem;
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--slate);
+            margin-bottom: 0.4rem;
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .card-text {
+            font-size: 0.85rem;
+            color: var(--slate);
+        }
+
+        .card-list {
+            list-style: none;
+            margin-top: 0.6rem;
+        }
+
+        .card-list li {
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.85rem;
+            color: var(--slate);
+            margin-bottom: 0.3rem;
+        }
+
+        .card-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--navy);
+        }
+
+        /* PILL ROW */
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .pill {
+            font-size: 0.75rem;
+            padding: 0.4rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(11, 31, 59, 0.06);
+            color: var(--slate);
+        }
+
+        /* TWO-COLUMN */
+        .two-column {
+            display: grid;
+            gap: 1.8rem;
+        }
+
+        @media (min-width: 900px) {
+            .two-column {
+                grid-template-columns: 1.3fr 1fr;
+            }
+        }
+
+        /* Tools items */
+        .tool-item {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.9rem;
+            align-items: flex-start;
+        }
+
+        .tool-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 999px;
+            background: rgba(11, 31, 59, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .tool-text-title {
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .tool-text-body {
+            font-size: 0.8rem;
+            color: var(--slate);
+        }
+
+        .scenario-list {
+            list-style: none;
+            font-size: 0.85rem;
+            color: var(--slate);
+        }
+
+        .scenario-list li { margin-bottom: 0.4rem; }
+
+        /* DASHBOARD */
+        .dashboard-section {
+            background: rgba(11, 31, 59, 0.03);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            gap: 1.7rem;
+        }
+
+        @media (min-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1.2fr 1.1fr;
+            }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(11, 31, 59, 0.06);
+            color: var(--slate);
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-small-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.7rem;
+            margin-top: 1rem;
+        }
+
+        .mini-stat {
+            background: #fffdf8;
+            border-radius: 12px;
+            padding: 0.7rem 0.75rem;
+            border: 1px solid rgba(11, 31, 59, 0.08);
+        }
+
+        .mini-stat-label {
+            font-size: 0.7rem;
+            color: var(--slate);
+        }
+
+        .mini-stat-value {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .progress-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(47, 133, 90, 0.09);
+            color: var(--success);
+            margin-top: 0.6rem;
+        }
+
+        .mini-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .mini-table th,
+        .mini-table td {
+            padding: 0.45rem 0.5rem;
+            border-bottom: 1px solid rgba(11, 31, 59, 0.08);
+            text-align: left;
+        }
+
+        .mini-table th {
+            font-weight: 600;
+            font-size: 0.78rem;
+            color: var(--slate);
+        }
+
+        .tag-soft {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 999px;
+            background: rgba(47, 133, 90, 0.08);
+            color: var(--success);
+        }
+
+        /* FORMS */
+        .form-card {
+            background: #ffffff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            padding: 1.4rem 1.3rem 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .form-row { margin-bottom: 0.75rem; }
+
+        .form-label {
+            display: block;
+            font-size: 0.78rem;
+            margin-bottom: 0.25rem;
+            color: var(--slate);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.5rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(11, 31, 59, 0.18);
+            font-size: 0.85rem;
+            outline: none;
+            background: #fdfaf5;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            border-radius: 14px;
+            resize: vertical;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: #2b6cb0;
+            box-shadow: 0 0 0 1px rgba(43, 108, 176, 0.15);
+        }
+
+        .form-helper {
+            font-size: 0.7rem;
+            color: var(--slate);
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.78rem;
+            color: var(--slate);
+            margin-bottom: 0.65rem;
+        }
+
+        .checkbox-row input { width: 14px; height: 14px; }
+
+        /* TIMELINE */
+        .timeline {
+            border-left: 2px solid rgba(11, 31, 59, 0.2);
+            padding-left: 1.1rem;
+            margin-top: 0.9rem;
+        }
+
+        .timeline-item {
+            margin-bottom: 0.9rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            width: 11px;
+            height: 11px;
+            border-radius: 999px;
+            background: #f6e1b8;
+            border: 2px solid var(--navy);
+            position: absolute;
+            left: -1.33rem;
+            top: 0.1rem;
+        }
+
+        .timeline-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .timeline-body {
+            font-size: 0.8rem;
+            color: var(--slate);
+        }
+
+        /* CONTACT & POLICIES */
+        .contact-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1.2fr 1fr;
+            }
+        }
+
+        .support-note { font-size: 0.9rem; color: var(--slate); }
+        .support-note strong { color: var(--navy); }
+
+        .policy-grid {
+            display: grid;
+            gap: 1.3rem;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .policy-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .policy-title {
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .policy-text {
+            color: var(--slate);
+            font-size: 0.8rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy);
+            color: #e2e8f0;
+            padding: 2rem 0 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-top {
+            display: grid;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        @media (min-width: 900px) {
+            .footer-top {
+                grid-template-columns: 2fr 1.1fr;
+            }
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            font-size: 0.8rem;
+        }
+
+        .footer-links a { opacity: 0.9; }
+        .footer-links a:hover { opacity: 1; }
+
+        .socials {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .social-pill {
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom {
+            font-size: 0.75rem;
+            color: #a0aec0;
+            margin-top: 1.4rem;
+            text-align: center;
+        }
+
+        /* SMALL UTIL */
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .highlight { color: var(--success); }
+
+        /* Simple quiz styles */
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.82rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <header>
+        <div class="nav container">
+            <div class="nav-logo">
+                <div class="nav-logo-mark">€</div>
+                <div>Youth Money Hub</div>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#learn">Learn the Basics</a>
+                <a href="#tools">Tools &amp; Practice</a>
+                <a href="#situations">Real Life Situations</a>
+                <a href="#dashboard">Dashboard</a>
+                <a href="#contact">Contact</a>
+                <a href="#policies">Policies</a>
+            </nav>
+
+            <div class="nav-auth">
+                <button class="btn btn-outline btn-signin">Sign In</button>
+                <button class="btn btn-primary btn-register">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME / HERO -->
+        <section id="home" class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <div class="hero-eyebrow">Calm • Empowering • Supportive</div>
+                    <h1 class="hero-title">
+                        Understand money.<br />
+                        <span>Build independence.</span><br />
+                        Feel confident.
+                    </h1>
+                    <p class="hero-text">
+                        A judgment-free space where young people can learn about money, practise real-life situations
+                        and track their growth over time – without feeling judged, rushed or overwhelmed.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#learn" class="btn btn-primary">Start Your Journey</a>
+                        <a href="#tools" class="btn btn-outline">Explore the tools</a>
+                    </div>
+
+                    <p class="hero-note" id="hero-welcome-note">
+                        Learn at your own pace, save your progress, and come back whenever you’re ready.
+                    </p>
+                </div>
+
+                <aside class="hero-card" aria-label="Preview of your personal dashboard">
+                    <div class="hero-card-header">
+                        <div>
+                            <div class="hero-card-title">Your money journey</div>
+                            <div class="muted" id="hero-dashboard-subtitle">A quick glance at your progress</div>
+                        </div>
+                        <span class="hero-pill">Calm &amp; supportive</span>
+                    </div>
+
+                    <div>
+                        <div class="hero-metric-label">Overall progress</div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" id="hero-progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <div class="hero-metrics">
+                        <div>
+                            <div class="hero-metric-label">Completed lessons</div>
+                            <div class="hero-metric-value" id="hero-lessons">0</div>
+                        </div>
+                        <div>
+                            <div class="hero-metric-label">Savings goal</div>
+                            <div class="hero-metric-value" id="hero-savings">$0.00</div>
+                        </div>
+                        <div>
+                            <div class="hero-metric-label">Day streak</div>
+                            <div class="hero-metric-value" id="hero-streak">0 days</div>
+                        </div>
+                    </div>
+
+                    <div class="muted" id="hero-quote">
+                        “I finally feel like I understand what’s happening with my money instead of being scared of it.”
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- LEARN THE BASICS -->
+        <section id="learn">
+            <div class="container">
+                <h2 class="section-title">Learn the Basics</h2>
+                <p class="section-subtitle">
+                    Clear, structured lessons that gently explain the most important money topics. No complicated
+                    vocabulary, no pressure – just understanding.
+                </p>
+
+                <div class="pill-row">
+                    <span class="pill">Money basics</span>
+                    <span class="pill">Budgeting for teens</span>
+                    <span class="pill">Saving vs spending</span>
+                    <span class="pill">Needs vs wants</span>
+                    <span class="pill">Income &amp; expenses</span>
+                </div>
+
+                <div class="cards-grid">
+                    <article class="card">
+                        <div class="card-tag">Topic</div>
+                        <div class="card-title">Money basics</div>
+                        <p class="card-text">
+                            Understand what money is, how people earn it and why it matters in everyday decisions.
+                        </p>
+                        <ul class="card-list">
+                            <li>Simple definitions of core money terms</li>
+                            <li>Relatable examples from teen life</li>
+                            <li>Short reflection questions at the end</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-tag">Topic</div>
+                        <div class="card-title">Budgeting for teens</div>
+                        <p class="card-text">
+                            Learn how to plan money that comes in and goes out – even if your income is small or irregular.
+                        </p>
+                        <ul class="card-list">
+                            <li>Beginner-friendly budget templates</li>
+                            <li>Real examples of weekly budgets</li>
+                            <li>Tips for avoiding common mistakes</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-tag">Topic</div>
+                        <div class="card-title">Saving vs spending</div>
+                        <p class="card-text">
+                            Explore how everyday decisions add up and how to balance fun now with your future goals.
+                        </p>
+                        <ul class="card-list">
+                            <li>Needs vs wants decision cards</li>
+                            <li>Short diagrams and mini stories</li>
+                            <li>Ideas for handling peer pressure</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOOLS & PRACTICE -->
+        <section id="tools" style="background: rgba(11, 31, 59, 0.03);">
+            <div class="container">
+                <h2 class="section-title">Tools &amp; Practice</h2>
+                <p class="section-subtitle">
+                    Use calm, interactive tools to practise planning, saving and making decisions, instead of only reading about them.
+                </p>
+
+                <div class="two-column">
+                    <div>
+                        <!-- BUDGET PLANNER -->
+                        <div class="form-card" style="margin-bottom:1.2rem;">
+                            <h3 class="card-title">Mini budget planner</h3>
+                            <p class="card-text">
+                                Enter a small monthly income and see how much you could set aside for savings, fun and essentials.
+                            </p>
+
+                            <div class="form-row">
+                                <label class="form-label" for="budget-income">Monthly income (real or imaginary)</label>
+                                <input class="form-input" type="number" id="budget-income" placeholder="e.g. 100" />
+                            </div>
+
+                            <div class="form-row">
+                                <label class="form-label" for="budget-saving">Percentage you want to save</label>
+                                <input class="form-input" type="number" id="budget-saving" placeholder="e.g. 30" />
+                                <div class="form-helper">Tip: even 10–20% can make a big difference over time.</div>
+                            </div>
+
+                            <button class="btn btn-primary" id="budget-calc-btn" type="button">Plan my budget</button>
+
+                            <div class="mt-1 muted" id="budget-result"></div>
+                        </div>
+
+                        <!-- SAVINGS GOAL -->
+                        <div class="form-card">
+                            <h3 class="card-title">Savings goal planner</h3>
+                            <p class="card-text">
+                                Set a savings goal and see how much you’d need to save each week to reach it calmly.
+                            </p>
+
+                            <div class="form-row">
+                                <label class="form-label" for="goal-amount">Goal amount</label>
+                                <input class="form-input" type="number" id="goal-amount" placeholder="e.g. 250" />
+                            </div>
+                            <div class="form-row">
+                                <label class="form-label" for="goal-weeks">How many weeks?</label>
+                                <input class="form-input" type="number" id="goal-weeks" placeholder="e.g. 12" />
+                            </div>
+                            <button class="btn btn-primary" id="goal-calc-btn" type="button">Calculate weekly saving</button>
+                            <div class="mt-1 muted" id="goal-result"></div>
+                        </div>
+                    </div>
+
+                    <!-- QUIZ + SCENARIOS -->
+                    <div class="card">
+                        <div class="card-tag">Interactive scenarios</div>
+                        <div class="card-title">What would you do?</div>
+                        <p class="card-text">
+                            Make choices in realistic money situations and see gentle feedback on what could happen next.
+                        </p>
+
+                        <ul class="scenario-list mt-sm">
+                            <li>“You just got your first paycheck – what’s the first thing you do?”</li>
+                            <li>“Your friends want to go out but it doesn’t fit your budget.”</li>
+                            <li>“You found shoes you love, but you also have a savings goal.”</li>
+                            <li>“You made a money mistake – how do you recover without panicking?”</li>
+                        </ul>
+
+                        <div class="mt-2">
+                            <div class="card-tag">Quick check-in</div>
+                            <p class="card-text">If you received $50 as a gift, what could be a balanced choice?</p>
+
+                            <div class="quiz-option">
+                                <input type="radio" name="gift50" value="allSpend" id="gift50-1" />
+                                <label for="gift50-1">Spend it all immediately on something fun.</label>
+                            </div>
+                            <div class="quiz-option">
+                                <input type="radio" name="gift50" value="allSave" id="gift50-2" />
+                                <label for="gift50-2">Save 100% and never use any of it.</label>
+                            </div>
+                            <div class="quiz-option">
+                                <input type="radio" name="gift50" value="mix" id="gift50-3" />
+                                <label for="gift50-3">Save part of it and spend part of it on something meaningful.</label>
+                            </div>
+
+                            <button class="btn btn-ghost mt-1" type="button" id="gift50-check-btn">Check answer</button>
+                            <div class="mt-sm muted" id="gift50-feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REAL LIFE SITUATIONS -->
+        <section id="situations">
+            <div class="container">
+                <h2 class="section-title">Real Life Situations</h2>
+                <p class="section-subtitle">
+                    Walk through scenarios that actually happen in teen life and explore how your choices can shape your future.
+                </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-title">Your first paycheck</div>
+                        <p class="timeline-body">
+                            Plan how to divide your pay between essentials, savings and fun. See how even a small
+                            percentage of saving adds up over several months.
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-title">Spending vs saving</div>
+                        <p class="timeline-body">
+                            Compare what happens if you always spend immediately vs. if you save a portion toward a bigger goal.
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-title">Peer pressure &amp; overspending</div>
+                        <p class="timeline-body">
+                            Practise saying “not this time” or suggesting a cheaper alternative when friends’ plans don’t match your budget.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="dashboard-section">
+            <div class="container">
+                <h2 class="section-title">Your Personal Dashboard</h2>
+                <p class="section-subtitle">
+                    A calm space where you can track lessons, savings goals and how your confidence with money changes over time.
+                </p>
+
+                <div class="dashboard-grid">
+                    <!-- Summary -->
+                    <div class="card">
+                        <span class="badge" id="dash-user-badge">Welcome, Guest</span>
+                        <h3 class="card-title">Overview of your journey</h3>
+                        <p class="card-text">
+                            These numbers are stored in your browser only (local demo). They help you see progress instead of only seeing mistakes.
+                        </p>
+
+                        <div class="stats-small-grid">
+                            <div class="mini-stat">
+                                <div class="mini-stat-label">Lessons completed</div>
+                                <div class="mini-stat-value" id="stat-lessons">0</div>
+                            </div>
+                            <div class="mini-stat">
+                                <div class="mini-stat-label">Total savings</div>
+                                <div class="mini-stat-value" id="stat-savings">$0.00</div>
+                            </div>
+                            <div class="mini-stat">
+                                <div class="mini-stat-label">Active goals</div>
+                                <div class="mini-stat-value" id="stat-goals">0</div>
+                            </div>
+                            <div class="mini-stat">
+                                <div class="mini-stat-label">Day streak</div>
+                                <div class="mini-stat-value" id="stat-streak">0</div>
+                            </div>
+                        </div>
+
+                        <div class="progress-pill" id="dash-mood-pill">
+                            <span>🧠</span>
+                            <span>Money confidence: just getting started</span>
+                        </div>
+
+                        <table class="mini-table mt-1">
+                            <thead>
+                                <tr>
+                                    <th>Lesson</th>
+                                    <th>Status</th>
+                                    <th>Reflection</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dash-lessons-table">
+                                <tr>
+                                    <td>Money basics</td>
+                                    <td><span class="tag-soft">Not started</span></td>
+                                    <td>–</td>
+                                </tr>
+                                <tr>
+                                    <td>Budgeting for teens</td>
+                                    <td><span class="tag-soft">Not started</span></td>
+                                    <td>–</td>
+                                </tr>
+                                <tr>
+                                    <td>Saving vs spending</td>
+                                    <td><span class="tag-soft">Not started</span></td>
+                                    <td>–</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Update progress & goals -->
+                    <div class="card">
+                        <span class="badge">Update your progress</span>
+                        <h3 class="card-title">Tiny steps that still count</h3>
+                        <p class="card-text">
+                            Use these mini controls to play with your dashboard numbers and see how consistent actions
+                            slowly change your situation.
+                        </p>
+
+                        <div class="form-row mt-1">
+                            <label class="form-label" for="complete-lesson-select">Mark a lesson as completed</label>
+                            <select class="form-select" id="complete-lesson-select">
+                                <option value="">Choose a lesson</option>
+                                <option value="Money basics">Money basics</option>
+                                <option value="Budgeting for teens">Budgeting for teens</option>
+                                <option value="Saving vs spending">Saving vs spending</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary mt-sm" id="complete-lesson-btn" type="button">Mark as completed</button>
+
+                        <hr class="mt-2" style="border:none;border-top:1px solid rgba(11,31,59,0.08);" />
+
+                        <div class="form-row mt-1">
+                            <label class="form-label" for="add-saving-amount">Add to savings (even a small amount)</label>
+                            <input class="form-input" type="number" id="add-saving-amount" placeholder="e.g. 10" />
+                        </div>
+                        <button class="btn btn-primary mt-sm" id="add-saving-btn" type="button">Add to my savings</button>
+
+                        <hr class="mt-2" style="border:none;border-top:1px solid rgba(11,31,59,0.08);" />
+
+                        <div class="form-row mt-1">
+                            <label class="form-label" for="add-goal-title">Create a simple savings goal</label>
+                            <input class="form-input" type="text" id="add-goal-title" placeholder="e.g. New headphones" />
+                        </div>
+                        <button class="btn btn-primary mt-sm" id="add-goal-btn" type="button">Add goal</button>
+
+                        <p class="muted mt-sm" id="dash-status-message"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIGN IN / REGISTER (CALM FRONT-END DEMO) -->
+        <section id="auth">
+            <div class="container">
+                <h2 class="section-title">Sign In &amp; Create Your Account</h2>
+                <p class="section-subtitle">
+                    In a real version, this would connect to a secure database. Here it’s a gentle front-end demo using your browser only.
+                </p>
+
+                <div class="two-column">
+                    <!-- Sign In -->
+                    <div class="form-card">
+                        <h3>Sign in</h3>
+                        <p class="muted">Use any email and password – they stay only in this browser demo.</p>
+
+                        <div class="form-row">
+                            <label class="form-label" for="signin-email">Email</label>
+                            <input class="form-input" type="email" id="signin-email" placeholder="you@example.com" />
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label" for="signin-password">Password</label>
+                            <input class="form-input" type="password" id="signin-password" placeholder="••••••••" />
+                        </div>
+                        <button class="btn btn-primary mt-sm" type="button" id="signin-submit">Sign in (demo)</button>
+                    </div>
+
+                    <!-- Register -->
+                    <div class="form-card">
+                        <h3>Create an account</h3>
+                        <p class="muted">
+                            Choose a name, age and preferred language. This helps the site feel more personal.
+                        </p>
+
+                        <div class="form-row">
+                            <label class="form-label" for="register-name">First name / nickname</label>
+                            <input class="form-input" type="text" id="register-name" placeholder="What should we call you?" />
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label" for="register-age">Age</label>
+                            <input class="form-input" type="number" id="register-age" placeholder="e.g. 15" />
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label" for="register-language">Preferred language</label>
+                            <select class="form-select" id="register-language">
+                                <option value="">Choose your language</option>
+                                <option>English</option>
+                                <option>French</option>
+                                <option>Spanish</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label" for="register-email">Email</label>
+                            <input class="form-input" type="email" id="register-email" placeholder="you@example.com" />
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label" for="register-password">Create a password</label>
+                            <input class="form-input" type="password" id="register-password" placeholder="At least 6 characters" />
+                            <div class="form-helper">Demo only – nothing is sent to a server.</div>
+                        </div>
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="register-parent" />
+                            <label for="register-parent">I want a parent / guardian to see my progress.</label>
+                        </div>
+
+                        <button class="btn btn-primary mt-sm" type="button" id="register-submit">Create my account (demo)</button>
+                        <p class="muted mt-sm" id="auth-message"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" style="background: rgba(11, 31, 59, 0.03);">
+            <div class="container">
+                <h2 class="section-title">Contact &amp; Support</h2>
+                <p class="section-subtitle">
+                    If you ever feel confused or stuck, you’re not alone. Reach out with questions or feedback.
+                </p>
+
+                <div class="contact-grid">
+                    <div class="form-card">
+                        <h3>Send us a message</h3>
+                        <p class="muted">
+                            This form is part of the design. In a full version, it would send your message to a support team.
+                        </p>
+
+                        <form class="contact-form">
+                            <div class="form-row">
+                                <label class="form-label" for="contact-name">Name</label>
+                                <input class="form-input" type="text" id="contact-name" placeholder="Your name or nickname" />
+                            </div>
+                            <div class="form-row">
+                                <label class="form-label" for="contact-email">Email</label>
+                                <input class="form-input" type="email" id="contact-email" placeholder="you@example.com" />
+                            </div>
+                            <div class="form-row">
+                                <label class="form-label" for="contact-message">Message</label>
+                                <textarea class="form-textarea" id="contact-message" placeholder="Tell us what you need help with..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send message (demo)</button>
+                        </form>
+                        <p class="muted mt-sm" id="contact-status"></p>
+                    </div>
+
+                    <div>
+                        <p class="support-note">
+                            <strong>You deserve a safe place to learn about money.</strong> Asking questions does not mean you’re “bad with money”.
+                            It means you’re brave enough to learn and grow.
+                        </p>
+                        <p class="support-note mt-sm">
+                            If you are under 18, it can also help to talk to a trusted adult – a parent, guardian, teacher or school counsellor –
+                            about your financial questions and goals.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- POLICIES & SAFETY -->
+        <section id="policies">
+            <div class="container">
+                <h2 class="section-title">Policies &amp; Safety Information</h2>
+                <p class="section-subtitle">
+                    Clear and accessible policies help you understand how your data is treated and what behaviour is expected on the platform.
+                </p>
+
+                <div class="policy-grid">
+                    <div>
+                        <div class="policy-title">Privacy Policy</div>
+                        <p class="policy-text">
+                            Explains what information is collected, how it is stored, and how you can request changes or deletion of your data.
+                            Your personal details are not sold.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="policy-title">Terms &amp; Conditions</div>
+                        <p class="policy-text">
+                            Describes how to use the website respectfully and responsibly, including account rules, age guidelines and limitations.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="policy-title">Safety Guidelines</div>
+                        <p class="policy-text">
+                            Sets clear expectations for kind behaviour, support and appropriate language in all interactive areas of the platform.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#learn">Learn the Basics</a>
+                        <a href="#tools">Tools &amp; Practice</a>
+                        <a href="#dashboard">Dashboard</a>
+                        <a href="#situations">Real Life Situations</a>
+                        <a href="#contact">Contact</a>
+                        <a href="#policies">Policies</a>
+                    </div>
+                    <p class="mt-sm" style="font-size: 0.8rem;">
+                        “Created to support youth in becoming financially confident and independent.”
+                    </p>
+                </div>
+
+                <div>
+                    <div style="font-size: 0.8rem; margin-bottom: 0.5rem;">Connect (concept only):</div>
+                    <div class="socials">
+                        <div class="social-pill">IG</div>
+                        <div class="social-pill">X</div>
+                        <div class="social-pill">YT</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> Youth Money Hub. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS (FRONT-END ONLY DEMO) -->
+    <script>
+        // YEAR
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Simple local "state" using localStorage
+        const STATE_KEY = "ymh_state";
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STATE_KEY);
+                if (!raw) return {
+                    user: null,
+                    lessonsCompleted: 0,
+                    totalSavings: 0,
+                    goals: [],
+                    streak: 0
+                };
+                return JSON.parse(raw);
+            } catch {
+                return {
+                    user: null,
+                    lessonsCompleted: 0,
+                    totalSavings: 0,
+                    goals: [],
+                    streak: 0
+                };
+            }
+        }
+
+        function saveState(state) {
+            localStorage.setItem(STATE_KEY, JSON.stringify(state));
+        }
+
+        let appState = loadState();
+
+        // ---- AUTH DEMO ----
+        function updateAuthUI() {
+            const badge = document.getElementById("dash-user-badge");
+            const heroNote = document.getElementById("hero-welcome-note");
+            const subtitle = document.getElementById("hero-dashboard-subtitle");
+
+            if (appState.user) {
+                badge.textContent = `Welcome, ${appState.user.name}`;
+                heroNote.textContent = `Welcome back, ${appState.user.name}. Your progress is saved in this browser.`;
+                subtitle.textContent = "Your personalised journey so far";
+            } else {
+                badge.textContent = "Welcome, Guest";
+                heroNote.textContent = "Learn at your own pace, save your progress, and come back whenever you’re ready.";
+                subtitle.textContent = "A quick glance at your progress";
+            }
+        }
+
+        document.getElementById("register-submit").addEventListener("click", () => {
+            const name = document.getElementById("register-name").value.trim();
+            const age = document.getElementById("register-age").value.trim();
+            const language = document.getElementById("register-language").value;
+            const email = document.getElementById("register-email").value.trim();
+            const password = document.getElementById("register-password").value.trim();
+            const msg = document.getElementById("auth-message");
+
+            if (!name || !email || !password) {
+                msg.textContent = "Please fill in at least your name, email and password.";
+                msg.style.color = "#dd6b20";
+                return;
+            }
+
+            appState.user = { name, age, language, email };
+            appState.streak = appState.streak || 1;
+            saveState(appState);
+            updateDashboardUI();
+
+            msg.textContent = "Account created (demo only). You are now signed in on this browser.";
+            msg.style.color = "#2f855a";
+        });
+
+        document.getElementById("signin-submit").addEventListener("click", () => {
+            const email = document.getElementById("signin-email").value.trim();
+            const password = document.getElementById("signin-password").value.trim();
+            const msg = document.getElementById("auth-message");
+
+            if (!email || !password) {
+                msg.textContent = "Enter email and password to sign in.";
+                msg.style.color = "#dd6b20";
+                return;
+            }
+
+            // For the demo, just create a simple user with this email if none exists
+            appState.user = appState.user || { name: email.split("@")[0] || "User", email };
+            appState.streak = appState.streak || 2;
+            saveState(appState);
+            updateDashboardUI();
+
+            msg.textContent = "Signed in (demo only). Data is stored locally.";
+            msg.style.color = "#2f855a";
+        });
+
+        // Navbar buttons use same demo auth
+        document.querySelector(".btn-signin").addEventListener("click", () => {
+            document.getElementById("auth").scrollIntoView({ behavior: "smooth" });
+        });
+
+        document.querySelector(".btn-register").addEventListener("click", () => {
+            document.getElementById("auth").scrollIntoView({ behavior: "smooth" });
+        });
+
+        // ---- TOOLS: BUDGET PLANNER ----
+        document.getElementById("budget-calc-btn").addEventListener("click", () => {
+            const income = parseFloat(document.getElementById("budget-income").value);
+            const savingPercent = parseFloat(document.getElementById("budget-saving").value);
+            const resultEl = document.getElementById("budget-result");
+
+            if (isNaN(income) || isNaN(savingPercent) || income <= 0 || savingPercent < 0) {
+                resultEl.textContent = "Please enter a valid income and saving percentage.";
+                return;
+            }
+
+            const savings = income * (savingPercent / 100);
+            const essentials = income * 0.5;
+            const fun = income - savings - essentials;
+
+            resultEl.innerHTML = `
+                If you save <span class="highlight">${savingPercent}%</span>, that’s about
+                <span class="highlight">$${savings.toFixed(2)}</span> saved.<br/>
+                A calm split could be roughly <span class="highlight">$${essentials.toFixed(2)}</span> for essentials,
+                <span class="highlight">$${Math.max(fun, 0).toFixed(2)}</span> for fun, and your savings on top.
+            `;
+        });
+
+        // ---- TOOLS: SAVINGS GOAL ----
+        document.getElementById("goal-calc-btn").addEventListener("click", () => {
+            const amount = parseFloat(document.getElementById("goal-amount").value);
+            const weeks = parseFloat(document.getElementById("goal-weeks").value);
+            const resultEl = document.getElementById("goal-result");
+
+            if (isNaN(amount) || isNaN(weeks) || amount <= 0 || weeks <= 0) {
+                resultEl.textContent = "Please enter a valid goal amount and number of weeks.";
+                return;
+            }
+
+            const perWeek = amount / weeks;
+            resultEl.innerHTML = `
+                You’d need to save about <span class="highlight">$${perWeek.toFixed(2)}</span> per week
+                to reach <span class="highlight">$${amount.toFixed(2)}</span> in ${weeks} week(s).
+            `;
+        });
+
+        // ---- QUIZ ----
+        document.getElementById("gift50-check-btn").addEventListener("click", () => {
+            const selected = document.querySelector("input[name='gift50']:checked");
+            const feedback = document.getElementById("gift50-feedback");
+
+            if (!selected) {
+                feedback.textContent = "Choose an option to see feedback.";
+                return;
+            }
+
+            if (selected.value === "mix") {
+                feedback.innerHTML = `That’s often a balanced choice – enjoying some of the money now while still
+                saving a portion for future goals.`;
+            } else if (selected.value === "allSpend") {
+                feedback.textContent = "Fun in the moment, but you might miss out on longer-term goals if this becomes a habit.";
+            } else {
+                feedback.textContent = "Saving everything can feel strict – it can help to leave room for small joys too.";
+            }
+        });
+
+        // ---- DASHBOARD UPDATE ----
+        function updateDashboardUI() {
+            // Stats
+            document.getElementById("stat-lessons").textContent = appState.lessonsCompleted || 0;
+            document.getElementById("stat-savings").textContent = "$" + (appState.totalSavings || 0).toFixed(2);
+            document.getElementById("stat-goals").textContent = (appState.goals || []).length;
+            document.getElementById("stat-streak").textContent = appState.streak || 0;
+
+            // Hero summary
+            document.getElementById("hero-lessons").textContent = appState.lessonsCompleted || 0;
+            document.getElementById("hero-savings").textContent = "$" + (appState.totalSavings || 0).toFixed(2);
+            document.getElementById("hero-streak").textContent = (appState.streak || 0) + " days";
+
+            const progressPercent = Math.min((appState.lessonsCompleted || 0) / 6 * 100, 100);
+            document.getElementById("hero-progress-fill").style.width = progressPercent + "%";
+
+            // Mood text
+            const pill = document.getElementById("dash-mood-pill");
+            if (appState.lessonsCompleted === 0 && appState.totalSavings === 0) {
+                pill.innerHTML = `<span>🧠</span><span>Money confidence: just getting started</span>`;
+            } else if (appState.lessonsCompleted < 3 && appState.totalSavings < 100) {
+                pill.innerHTML = `<span>🌱</span><span>Money confidence: growing step by step</span>`;
+            } else {
+                pill.innerHTML = `<span>✨</span><span>Money confidence: you’re building strong habits</span>`;
+            }
+
+            // Lessons table
+            const tableBody = document.getElementById("dash-lessons-table");
+            const completedSet = new Set(appState.completedLessons || []);
+            const lessons = ["Money basics", "Budgeting for teens", "Saving vs spending"];
+
+            tableBody.innerHTML = "";
+            lessons.forEach(name => {
+                const tr = document.createElement("tr");
+                const tdName = document.createElement("td");
+                tdName.textContent = name;
+
+                const tdStatus = document.createElement("td");
+                const span = document.createElement("span");
+                span.className = "tag-soft";
+                span.textContent = completedSet.has(name) ? "Completed" : "Not started";
+                tdStatus.appendChild(span);
+
+                const tdRef = document.createElement("td");
+                tdRef.textContent = completedSet.has(name) ? "You completed this in the demo." : "–";
+
+                tr.appendChild(tdName);
+                tr.appendChild(tdStatus);
+                tr.appendChild(tdRef);
+                tableBody.appendChild(tr);
+            });
+
+            updateAuthUI();
+        }
+
+        document.getElementById("complete-lesson-btn").addEventListener("click", () => {
+            const select = document.getElementById("complete-lesson-select");
+            const lesson = select.value;
+            const status = document.getElementById("dash-status-message");
+
+            if (!lesson) {
+                status.textContent = "Choose a lesson to mark as completed.";
+                status.style.color = "#dd6b20";
+                return;
+            }
+
+            appState.completedLessons = appState.completedLessons || [];
+            if (!appState.completedLessons.includes(lesson)) {
+                appState.completedLessons.push(lesson);
+                appState.lessonsCompleted = (appState.lessonsCompleted || 0) + 1;
+            }
+
+            saveState(appState);
+            updateDashboardUI();
+
+            status.textContent = `Nice! "${lesson}" is now marked as completed.`;
+            status.style.color = "#2f855a";
+        });
+
+        document.getElementById("add-saving-btn").addEventListener("click", () => {
+            const amount = parseFloat(document.getElementById("add-saving-amount").value);
+            const status = document.getElementById("dash-status-message");
+            if (isNaN(amount) || amount <= 0) {
+                status.textContent = "Enter a positive amount to add to your savings.";
+                status.style.color = "#dd6b20";
+                return;
+            }
+
+            appState.totalSavings = (appState.totalSavings || 0) + amount;
+            saveState(appState);
+            updateDashboardUI();
+
+            status.textContent = `You added $${amount.toFixed(2)} to your savings in this demo.`;
+            status.style.color = "#2f855a";
+            document.getElementById("add-saving-amount").value = "";
+        });
+
+        document.getElementById("add-goal-btn").addEventListener("click", () => {
+            const title = document.getElementById("add-goal-title").value.trim();
+            const status = document.getElementById("dash-status-message");
+            if (!title) {
+                status.textContent = "Give your goal a name first.";
+                status.style.color = "#dd6b20";
+                return;
+            }
+
+            appState.goals = appState.goals || [];
+            appState.goals.push({ title, createdAt: new Date().toISOString() });
+            saveState(appState);
+            updateDashboardUI();
+
+            status.textContent = `Goal "${title}" added (demo only).`;
+            status.style.color = "#2f855a";
+            document.getElementById("add-goal-title").value = "";
+        });
+
+        // ---- CONTACT FORM ----
+        document.querySelector(".contact-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const name = document.getElementById("contact-name").value.trim();
+            const email = document.getElementById("contact-email").value.trim();
+            const message = document.getElementById("contact-message").value.trim();
+            const status = document.getElementById("contact-status");
+
+            if (!name || !email || !message) {
+                status.textContent = "Please fill in all fields before sending.";
+                status.style.color = "#dd6b20";
+                return;
+            }
+
+            status.textContent = "Message received (demo). In a real site, support would reply by email.";
+            status.style.color = "#2f855a";
+            e.target.reset();
+        });
+
+        // Initial paint
+        updateDashboardUI();
+    </script>
+</body>
+</html>
